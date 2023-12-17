@@ -2,23 +2,23 @@ pipeline {
     agent any
     
     stages {
-        stage('Prepare') {
+        stage('Build and Run Container') {
             steps {
                 script {
-                    // Python ortamını hazırla
-                    sh 'python -m venv venv'
-                    sh 'source venv/bin/activate'
-                    sh 'pip install pygame'
+                    // Docker içinde snake-container'ı çalıştırma
+                    docker.image('snake-container').run('--name my-snake-container -d')
                 }
             }
         }
-        stage('Test Game') {
+        stage('Execute Commands Inside Container') {
             steps {
                 script {
-                    // Oyunun Python dosyasını çalıştır
-                    sh 'python snake_game.py'
+                    // Docker konteynerı içinde komutları çalıştırma örneği
+                    docker.inside("--workdir /app my-snake-container") {
+                        sh 'ls -l' // Örnek bir komut
+                        sh 'python snake_game.py' // Snake oyununu çalıştırabilirsiniz
+                    }
                 }
             }
         }
-    }
 }
