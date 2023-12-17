@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Docker içinde snake-container'ı çalıştırma
-                    docker.image('snake-container').run('--name my-snake-container -d')
+                    docker.image('snake-app').run('--name snake-container -d')
                 }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     // Docker konteynerı içinde komutları çalıştırma örneği
-                    docker.inside("--workdir /app my-snake-container") {
+                    docker.inside("--workdir /app snake-container") {
                         sh 'ls -l' // Örnek bir komut
                         sh 'python snake_game.py' // Snake oyununu çalıştırabilirsiniz
                     }
