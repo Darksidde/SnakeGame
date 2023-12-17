@@ -2,11 +2,21 @@ pipeline {
     agent any
     
     stages {
-        stage('Test') {
+        stage('Prepare') {
             steps {
                 script {
-                    sh 'pip install -r requirements.txt' // Gerekli kütüphaneleri yükleyin
-                    sh 'python -m unittest test_game.py' // Test senaryosunu çalıştırın
+                    // Python ortamını hazırla
+                    sh 'python -m venv venv'
+                    sh 'source venv/bin/activate'
+                    sh 'pip install pygame'
+                }
+            }
+        }
+        stage('Test Game') {
+            steps {
+                script {
+                    // Oyunun Python dosyasını çalıştır
+                    sh 'python snake_game.py'
                 }
             }
         }
