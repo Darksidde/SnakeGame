@@ -13,4 +13,4 @@ COPY . /app
 
 # Uygulamanız için gerekli komutları burada çalıştırabilirsiniz
 # Örneğin bir Python dosyasını çalıştırma komutu:
-# CMD ["python", "snake_game.py"]
+CMD ["python", "snake_game.py"]
