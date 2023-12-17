@@ -5,7 +5,7 @@ pipeline {
         stage('Build and Run Container') {
             steps {
                 script {
-                    // Docker içinde snake-container'ı çalıştırma
+                    // Docker içinde snake-app imajından bir snake-container'ı çalıştırma
                     docker.image('snake-app').run('--name snake-container -d')
                 }
             }
